@@ -45,9 +45,8 @@ emailInput.addEventListener('input', validateEmail);
 messageInput.addEventListener('input', validateMessage);
 
 form.addEventListener('submit', function(event) {
-  event.preventDefault(); // Stop form from submitting normally
+  event.preventDefault(); 
 
-  // Run all validations
   const isNameValid = validateName();
   const isEmailValid = validateEmail();
   const isMessageValid = validateMessage();
