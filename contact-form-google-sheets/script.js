@@ -1,7 +1,5 @@
-// link
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwwPy1aMLGgXW0WDBW6I7HzubPHJA2xIwnEb-NOgrDC9v7WE97oEytnGdPzliRm6x9z7w/exec';
 
-// form elements
 const form = document.getElementById('contactForm');
 const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
@@ -11,7 +9,6 @@ const emailError = document.getElementById('emailError');
 const messageError = document.getElementById('messageError');
 const formSuccess = document.getElementById('formSuccess');
 
-// Validation functions
 function validateName() {
   const name = nameInput.value.trim();
   if (name.length < 2) {
@@ -43,29 +40,23 @@ function validateMessage() {
   return true;
 }
 
-// Real-time validation 
 nameInput.addEventListener('input', validateName);
 emailInput.addEventListener('input', validateEmail);
 messageInput.addEventListener('input', validateMessage);
 
-// Form submit event
 form.addEventListener('submit', function(event) {
-  event.preventDefault(); // Stop form from submitting normally
-
-  // Run all validations
+  event.preventDefault();
   const isNameValid = validateName();
   const isEmailValid = validateEmail();
   const isMessageValid = validateMessage();
 
   if (isNameValid && isEmailValid && isMessageValid) {
-    // Prepare data to send
     const formData = {
       name: nameInput.value.trim(),
       email: emailInput.value.trim(),
       message: messageInput.value.trim()
     };
 
-    // Send data to Google Apps Script Web App
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
@@ -75,7 +66,7 @@ form.addEventListener('submit', function(event) {
       body: JSON.stringify(formData)
     })
     .then(function() {
-      formSuccess.textContent = "Your message has been sent!";
+      formSuccess.textContent = "Your message has been sent";
       form.reset();
       setTimeout(function() {
         formSuccess.textContent = "";
